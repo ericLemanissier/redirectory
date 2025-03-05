@@ -31,3 +31,7 @@ export function badGateway(message: string) {
 export function conflict(message: string) {
   return new Error(409, message)
 }
+
+export function authenticationException(message: string) {
+  return new Error(401, message)
+}

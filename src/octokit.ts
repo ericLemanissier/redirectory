@@ -1,6 +1,6 @@
 import fs from 'fs'
 import { Octokit } from 'octokit'
-import { badRequest } from './http.js'
+import { badRequest, authenticationException } from './http.js'
 import { createOAuthAppAuth } from '@octokit/auth-oauth-app'
 
 const verbose = parseInt(process.env.VERBOSE) || 0
@@ -33,7 +33,7 @@ export function parseBearer(req) {
     if (user && auth) {
       return { user, auth }
     }
-    throw badRequest('Missing header: Authorization')
+    throw authenticationException('Missing header: Authorization')
   }
   const m1 = header.match(/^Bearer\s+(\S+?)\s*$/)
   if (!m1) {
